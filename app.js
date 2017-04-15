@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser= require('body-parser');
 var exphbs  = require('express-handlebars');
 var path    = require('path');
 
@@ -20,12 +21,18 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 
+app.use(bodyParser.urlencoded({extended: true}))
+
 // assets path
 app.use(express.static(path.join(__dirname, '/dist')));
 
 // mount the index route at the / path
 app.use('/', index); 
 //app.use('/users', users);
+
+app.post('/quotes', (req, res) => {
+  console.log(req.body);
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
