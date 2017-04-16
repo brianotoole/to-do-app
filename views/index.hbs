@@ -1,6 +1,14 @@
-<h1>To Do List</h1>
-<form action="/quotes" method="POST">
-  <input type="text" placeholder="name" name="name">
-  <input type="text" placeholder="quote" name="quote">
+<h1>To-Do List</h1>
+<ul class="items">
+  {{#each todos}}   
+    <li class="item">
+      <span>{{name}}</span>
+    </li>
+  {{/each}}
+</ul>
+
+<h2>Add Item</h2>
+<form action="/todolist" method="POST">
+  <input type="text" placeholder="Item" name="name">
   <button type="submit">Add Item</button>
 </form>

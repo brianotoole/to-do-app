@@ -1,57 +1,55 @@
 var express = require('express');
 var bodyParser= require('body-parser');
-var exphbs  = require('express-handlebars');
-var path    = require('path');
-
-// routes
-var index = require('./routes/index');
-//var users = require('./routes/users');
-
+var MongoClient = require('mongodb').MongoClient;
+var exphbs = require('express-handlebars');
+var path = require('path');
 var app = express();
 
-// view engine setup
-var hbs = exphbs.create({
-    defaultLayout: 'default',
-    extname: 'hbs', //file extenstion name (.hbs)
-    partialsDir: [
-        'views/partials/'
-    ]
+// Connect to mongo db
+var db;
+MongoClient.connect('mongodb://dev:35Xsi6C8*136@ds161640.mlab.com:61640/todolist', (err, database) => {
+    // start the server, but only when db is connected
+    db = database;
+    app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(err, req) {
+        if(err) {
+            console.log('server error');
+        } else {
+            console.log('server listening on: 3000');
+        }
+    });
 });
+
+// view engine setup
+var hbs = exphbs.create({defaultLayout: 'default',extname: 'hbs', partialsDir: ['views/partials/']});
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
-
-
-app.use(bodyParser.urlencoded({extended: true}))
-
-// assets path
+app.use(bodyParser.urlencoded({extended: true}));
+// set assets path
 app.use(express.static(path.join(__dirname, '/dist')));
 
-// mount the index route at the / path
-app.use('/', index); 
-//app.use('/users', users);
-
-app.post('/quotes', (req, res) => {
-  console.log(req.body);
-})
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  res.locals.message = err.message;
-  res.render('error', {
-        title: err
+// GET req, index
+app.get('/', function (req, res) {
+  // find all items in db collection('name')
+  db.collection('todos').find().toArray((err, result) => {
+      res.render('index', {
+        title: 'To Do List',
+        todos: result
+      });
   });
 });
 
-
-// listening
-app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(err, req) {
-    if(err) {
-        console.log('server error');
-    } else {
-        console.log('server listening on: 3000');
-    }
+// GET req, success
+app.get('/success', function (req, res) {
+    res.render('success', {
+        title: 'Success'
+    });
 });
 
-module.exports = app;
+// POST req, from form action
+app.post('/todolist', (req, res) => {
+  db.collection('todos').save(req.body, (err, result) => {
+    if (err) return console.log(err)
+    console.log('saved to database');
+    res.redirect('/success');
+  })
+})
