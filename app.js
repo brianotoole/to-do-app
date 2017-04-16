@@ -24,6 +24,7 @@ var hbs = exphbs.create({defaultLayout: 'default',extname: 'hbs', partialsDir: [
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 // set assets path
 app.use(express.static(path.join(__dirname, '/dist')));
 
@@ -32,24 +33,34 @@ app.get('/', function (req, res) {
   // find all items in db collection('name')
   db.collection('todos').find().toArray((err, result) => {
       res.render('index', {
-        title: 'To Do List',
+        title: 'To-Do List',
         todos: result
       });
   });
 });
 
 // GET req, success
-app.get('/success', function (req, res) {
-    res.render('success', {
-        title: 'Success'
-    });
-});
+//app.get('/success/:name', function (req, res, next) {
+//    res.render('success', {
+//        title: 'Success',
+//        output: req.params.name
+//    });
+//});
 
-// POST req, from form action
-app.post('/todolist', (req, res) => {
+// POST req, save item via form action
+app.post('/submit', (req, res, next) => {
   db.collection('todos').save(req.body, (err, result) => {
     if (err) return console.log(err)
-    console.log('saved to database');
-    res.redirect('/success');
+    res.redirect('/');
+    console.log('Item saved.');
   })
 })
+
+// GET req, delete item
+app.get('/delete/:name', function (req, res) {
+  var name = req.params.name;
+  db.collection('todos').remove({ name }, function(err) {
+    res.redirect( '/' );
+    console.log('Item deleted.');
+  });
+});

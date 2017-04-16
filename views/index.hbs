@@ -2,13 +2,13 @@
 <ul class="items">
   {{#each todos}}   
     <li class="item">
-       <button id="delete">X</button><span>{{name}}</span>
+       <a href="/delete/{{name}}">X</a><span>{{name}}</span>
     </li>
   {{/each}}
 </ul>
 
 <h2>Add Item</h2>
-<form action="/todolist" method="POST">
+<form action="/submit" method="POST">
   <input type="text" placeholder="Item" name="name">
   <button type="submit">Add Item</button>
 </form>
