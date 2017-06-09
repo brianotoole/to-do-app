@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -33,16 +33,18 @@
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmory imports with the correct context
+/******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
 /******/
-/******/ 	// define getter function for harmory exports
+/******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		Object.defineProperty(exports, name, {
-/******/ 			configurable: false,
-/******/ 			enumerable: true,
-/******/ 			get: getter
-/******/ 		});
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
 /******/ 	};
 /******/
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -66,19 +68,18 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(0);
 
-
+// Create item on submit of btn click
 $('.submit-item').on('click', function (event) {
-    console.log('clicked');
     event.preventDefault(); // Stop form from causing a page refresh.
     var data = {};
 		data.name = $("#submit-form").find("input").val();
@@ -88,16 +89,36 @@ $('.submit-item').on('click', function (event) {
       contentType:'application/json',
       url: '/create',
       success: function(data) {
-        console.log(JSON.stringify(data));
-          var itemName = data.name;
-          var newLiHtml = '<li class="item"' + itemName + '</span></li>';
-          var newLiHtml = '<li class="item"><a href="/delete/"' + itemName + '>X</a><span>'+ itemName +'</span>';
-          $('ul.items').append(newLiHtml);
-          $('.item').val('');
+        var itemName = data.name;
+        var itemHtml = '<li class="item" data-name="' + itemName + '" ><a href="/delete/"' + itemName + '>X</a><span>'+ itemName +'</span>';
+        $('ul.items').append(itemHtml);
+        //console.log(JSON.stringify(data));
       }
     });
 });
 
+// Delete item on click
 
-/***/ }
+
+$('li.item').on('click', function (event) {
+  event.preventDefault();
+  var name = $(this).attr('data-name');
+  $(this).remove();
+  $.ajax({
+    type: 'GET',
+    data: name,
+    contentType:'application/json',
+    url: '/delete/'+name,
+    complete: function(response) {
+      //$(this).remove();
+    }
+  });
+});
+
+function deleteItem() {
+
+}
+
+
+/***/ })
 /******/ ]);

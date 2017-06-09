@@ -1,7 +1,7 @@
 <h1>{{{title}}}</h1>
 <ul class="items">
   {{#each todos}}
-    <li class="item">
+    <li class="item" data-name="{{name}}">
        <a href="/delete/{{name}}">X</a><span>{{name}}</span>
     </li>
   {{/each}}
@@ -9,6 +9,6 @@
 
 <h2>Add Item</h2>
 <form id="submit-form" action="/create" method="POST">
-  <input type="text" placeholder="Item" name="name" id="v">
+  <input type="text" placeholder="Item" name="name">
   <button class="btn submit-item" type="submit">Add Item</button>
 </form>

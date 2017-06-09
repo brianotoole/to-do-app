@@ -28,12 +28,12 @@ router.get('/success/:name', function (req, res, next) {
 
 // POST req, save item via form action
 router.post('/create', (req, res, next) => {
+  var name = req.body.name;
   db.collection('todos').save(req.body, (err, result) => {
     if (err) return console.log(err)
     var obj = {};
-  	console.log('body: ' + JSON.stringify(req.body));
+  	console.log('created: ' + JSON.stringify(name));
   	res.send(req.body);
-    console.log('Item saved.');
   })
 })
 
@@ -41,8 +41,8 @@ router.post('/create', (req, res, next) => {
 router.get('/delete/:name', function (req, res) {
   var name = req.params.name;
   db.collection('todos').remove({ name }, function(err) {
-    res.redirect( '/' );
-    console.log('Item deleted.');
+    //res.redirect( '/' );
+    console.log('deleted: ' + JSON.stringify(name));
   });
 });
 
