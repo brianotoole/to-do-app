@@ -1,6 +1,6 @@
 require("../scss/style.scss");
 
-// Create item on submit of btn click
+// Create Item
 $('.submit-item').on('click', function (event) {
     event.preventDefault(); // Stop form from causing a page refresh.
     var data = {};
@@ -14,14 +14,13 @@ $('.submit-item').on('click', function (event) {
         var itemName = data.name;
         var itemHtml = '<li class="item" data-name="' + itemName + '" ><a href="/delete/"' + itemName + '>X</a><span>'+ itemName +'</span>';
         $('ul.items').append(itemHtml);
+        $("#submit-form").find("input").val(''); 
         //console.log(JSON.stringify(data));
       }
     });
 });
 
-// Delete item on click
-
-
+// Delete Item
 $('li.item').on('click', function (event) {
   event.preventDefault();
   var name = $(this).attr('data-name');
@@ -36,7 +35,3 @@ $('li.item').on('click', function (event) {
     }
   });
 });
-
-function deleteItem() {
-
-}
