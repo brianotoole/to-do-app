@@ -1,9 +1,7 @@
 require('dotenv').config();
 var port = process.env.APP_PORT || 3000;
 var host = process.env.APP_HOST || 'localhost';
-var isProduction = 'production' === process.env.NODE_ENV;
 
-var browserSync = require('browser-sync');
 var express = require('express');
 var path = require('path');
 var bodyParser= require('body-parser');
