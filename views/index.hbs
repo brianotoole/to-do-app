@@ -1,6 +1,6 @@
-<h1>To-Do List</h1>
+<h1>{{{title}}}</h1>
 <ul class="items">
-  {{#each todos}}   
+  {{#each todos}}
     <li class="item">
        <a href="/delete/{{name}}">X</a><span>{{name}}</span>
     </li>
@@ -8,7 +8,7 @@
 </ul>
 
 <h2>Add Item</h2>
-<form action="/create" method="POST">
-  <input type="text" placeholder="Item" name="name">
-  <button type="submit">Add Item</button>
+<form id="submit-form" action="/create" method="POST">
+  <input type="text" placeholder="Item" name="name" id="v">
+  <button class="btn submit-item" type="submit">Add Item</button>
 </form>

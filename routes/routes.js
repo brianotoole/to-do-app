@@ -19,18 +19,20 @@ router.get('/', function (req, res) {
 });
 
 // GET req, success
-//router.get('/success/:name', function (req, res, next) {
-//    res.render('success', {
-//        title: 'Success',
-//        output: req.params.name
-//    });
-//});
+router.get('/success/:name', function (req, res, next) {
+    res.render('success', {
+        title: 'Success',
+        output: req.params.name
+    });
+});
 
 // POST req, save item via form action
 router.post('/create', (req, res, next) => {
   db.collection('todos').save(req.body, (err, result) => {
     if (err) return console.log(err)
-    res.redirect('/');
+    var obj = {};
+  	console.log('body: ' + JSON.stringify(req.body));
+  	res.send(req.body);
     console.log('Item saved.');
   })
 })
