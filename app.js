@@ -1,3 +1,7 @@
+require('dotenv').config();
+var port = process.env.APP_PORT || 3000;
+var host = process.env.APP_HOST || 'localhost';
+
 var express = require('express');
 var path = require('path');
 var bodyParser= require('body-parser');
@@ -25,12 +29,13 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(err, req) {
-  if(err) {
-    console.log('server error');
-    } else {
-      console.log('server listening on: 3000');
-    }
-});
+// start server
+app.listen(port, function (err) {
+  if (err) {
+    console.log('error')
+  } else {
+    console.log('listening on port 3000!')
+  }
+})
 
 module.exports = app;
