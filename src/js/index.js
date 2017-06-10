@@ -27,12 +27,9 @@ $('li.item').on('click', function (event) {
   var id = $(this).attr('data-id');
   $(this).remove();
   $.ajax({
-      type: 'GET',
+      type: 'DELETE',
       data: id,
       contentType:'application/json',
-      url: '/delete/'+id,
-      success: function(response) {
-        //do something else w/ server response
-      }
+      url: '/delete/'+id
   });
 });
