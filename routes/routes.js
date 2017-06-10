@@ -8,13 +8,15 @@ var express = require('express');
 var mysql = require('mysql');
 var router = express.Router();
 
-var pool  = mysql.createPool({
+var sqlPool = {
   connectionLimit: 10,
   host: dbHost,
   user: dbUser,
   password: dbPass,
   database: dbName
-});
+};
+
+var connect = mysql.createPool(sqlPool);
 
 // Connect to DB
 //connection.connect(function(err) {
@@ -24,7 +26,8 @@ var pool  = mysql.createPool({
 
 // GET * items
 router.get('/', function (req, res) {
-  pool.query('SELECT * FROM name', function(err, result) {
+  connect.query('SELECT * FROM name', function(err, result) {
+    if (err) console.log(err.code);
       res.render('index', {
         title: 'To-Do List',
         todos: result
@@ -35,8 +38,8 @@ router.get('/', function (req, res) {
 // Create item
 router.post('/create', (req, res, next) => {
   var name = req.body.name;
-  pool.query('INSERT INTO name SET ?', req.body, function(err, result) {
-    if (err) return console.log(err);
+  connect.query('INSERT INTO name SET ?', req.body, function(err, result) {
+    if (err) console.log(err.code);
   	console.log('created: ' + JSON.stringify(name));
   	//res.send(req.body);
     //console.log(result.insertId);
@@ -52,7 +55,7 @@ router.post('/create', (req, res, next) => {
 // Delete item (passes GET req from link click via ajax)
 router.get('/delete/:id', function (req, res) {
   var id = req.params.id;
-  pool.query('DELETE FROM name WHERE id= ?', [id], function(err, result) {
+  connect.query('DELETE FROM name WHERE id= ?', [id], function(err, result) {
     if (err) console.log(err.code);
     console.log('deleted: ' + JSON.stringify(id));
   });
