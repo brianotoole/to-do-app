@@ -1,12 +1,18 @@
+require('dotenv').config();
+var dbHost = process.env.APP_DB_HOST;
+var dbUser = process.env.APP_DB_USER;
+var dbPass = process.env.APP_DB_PASS;
+var dbName = process.env.APP_DB_NAME;
+
 var express = require('express');
 var mysql = require('mysql');
 var router = express.Router();
 
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'todos'
+  host: dbHost,
+  user: dbUser,
+  password: dbPass,
+  database: dbName
 })
 
 // Connect to DB
