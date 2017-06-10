@@ -12,9 +12,9 @@ $('.submit-item').on('click', function (event) {
       url: '/create',
       success: function(data) {
         var itemName = data.name;
-        var itemHtml = '<li class="item" data-name="' + itemName + '" ><a href="/delete/"' + itemName + '>X</a><span>'+ itemName +'</span>';
+        var itemHtml = '<li class="item" data-name="'+itemName+'"><a href="/delete/'+itemName+'">X</a><span>'+itemName +'</span>';
         $('ul.items').append(itemHtml);
-        $("#submit-form").find("input").val(''); 
+        $("#submit-form").find("input").val('');
         //console.log(JSON.stringify(data));
       }
     });
