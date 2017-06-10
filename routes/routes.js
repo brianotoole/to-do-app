@@ -35,7 +35,7 @@ router.get('/', function (req, res) {
 router.post('/create', (req, res, next) => {
   var name = req.body.name;
   connection.query('INSERT INTO name SET ?', req.body, function(err, result) {
-    if (err) return console.log(err)
+    if (err) return console.log("Error creating : %s ",err );
     var obj = {};
   	console.log('created: ' + JSON.stringify(name));
   	//res.send(req.body);
@@ -50,10 +50,11 @@ router.post('/create', (req, res, next) => {
 })
 
 // GET req, delete item
-router.get('/delete/:id', function (req, res) {
+router.delete('/delete/:id', function (req, res) {
   var id = req.params.id;
   connection.query('DELETE FROM name WHERE id= ?', [id], function(err, result) {
     //res.redirect( '/' );
+    if (err) return console.log("Error deleting : %s ",err );
     console.log('deleted: ' + JSON.stringify(id));
   });
 });
