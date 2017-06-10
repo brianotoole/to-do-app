@@ -1,16 +1,23 @@
 var express = require('express');
-var MongoClient = require('mongodb').MongoClient;
+var mysql = require('mysql');
 var router = express.Router();
-var db;
+
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root',
+  database: 'todos'
+})
 
 // Connect to DB
-MongoClient.connect('mongodb://dev:35Xsi6C8*136@ds161640.mlab.com:61640/todolist', (err, database) => {
-    db = database;
-});
+connection.connect(function(err) {
+  if (err) throw err
+  console.log('mysql db is connected.')
+})
 
-// GET items in db collection()
+// GET * items
 router.get('/', function (req, res) {
-  db.collection('todos').find().toArray((err, result) => {
+  connection.query('SELECT * FROM name', function(err, result) {
       res.render('index', {
         title: 'To-Do List',
         todos: result
@@ -18,18 +25,10 @@ router.get('/', function (req, res) {
   });
 });
 
-// GET req, success
-router.get('/success/:name', function (req, res, next) {
-    res.render('success', {
-        title: 'Success',
-        output: req.params.name
-    });
-});
-
-// POST req, save item via form action
+// POST, create item
 router.post('/create', (req, res, next) => {
   var name = req.body.name;
-  db.collection('todos').save(req.body, (err, result) => {
+  connection.query('INSERT INTO name SET ?', req.body, function(err, result) {
     if (err) return console.log(err)
     var obj = {};
   	console.log('created: ' + JSON.stringify(name));
@@ -40,7 +39,7 @@ router.post('/create', (req, res, next) => {
 // GET req, delete item
 router.get('/delete/:name', function (req, res) {
   var name = req.params.name;
-  db.collection('todos').remove({ name }, function(err) {
+  connection.query('DELETE FROM name WHERE name= ?', [name], function(err, result) {
     //res.redirect( '/' );
     console.log('deleted: ' + JSON.stringify(name));
   });
