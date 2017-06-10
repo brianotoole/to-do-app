@@ -5,19 +5,19 @@ $('.submit-item').on('click', function (event) {
     event.preventDefault(); // Stop form from causing a page refresh.
     var data = {};
 		data.name = $("#submit-form").find("input").val();
-    var id;
     $.ajax({
-      type: 'POST',
-      data: JSON.stringify(data),
-      contentType:'application/json',
-      url: '/create',
-      success: function(data) {
-        var itemName = data.name;
-        var itemHtml = '<li class="item" data-id="'+itemName+'"><a href="/delete/'+itemName+'">X</a><span>'+itemName +'</span>';
-        $('ul.items').append(itemHtml);
-        $("#submit-form").find("input").val('');
-        //console.log(JSON.stringify(data));
-      }
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType:'application/json',
+        url: '/create',
+        success: function(data) {
+            console.log(data);
+            var name = data.name;
+            var id = data.id;
+            var itemHtml = '<li class="item" data-id="'+id+'"><a href="/delete/'+id+'">X</a><span>'+name+'</span>';
+            $('ul.items').append(itemHtml);
+            $("#submit-form").find("input").val('');
+        }
     });
 });
 
@@ -27,12 +27,12 @@ $('li.item').on('click', function (event) {
   var id = $(this).attr('data-id');
   $(this).remove();
   $.ajax({
-    type: 'GET',
-    data: id,
-    contentType:'application/json',
-    url: '/delete/'+id,
-    complete: function(response) {
-      //$(this).remove();
-    }
+      type: 'GET',
+      data: id,
+      contentType:'application/json',
+      url: '/delete/'+id,
+      success: function(response) {
+        //do something else w/ server response
+      }
   });
 });

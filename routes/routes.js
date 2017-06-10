@@ -38,7 +38,14 @@ router.post('/create', (req, res, next) => {
     if (err) return console.log(err)
     var obj = {};
   	console.log('created: ' + JSON.stringify(name));
-  	res.send(req.body);
+  	//res.send(req.body);
+    //console.log(result.insertId);
+    var id = JSON.stringify(result.insertId);
+    res.json({
+      success: true,
+      name: name,
+      id: id
+    });
   })
 })
 
