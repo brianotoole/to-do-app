@@ -6,14 +6,18 @@ var dbName = process.env.APP_DB_NAME;
 
 var express = require('express');
 var mysql = require('mysql');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
 var router = express.Router();
 
-var connection = mysql.createConnection({
+var dbOptions = {
   host: dbHost,
   user: dbUser,
   password: dbPass,
   database: dbName
-})
+}
+var connection = mysql.createConnection(dbOptions);
+var sessionStore = new MySQLStore({}/* session store options */, connection);
 
 // Connect to DB
 connection.connect(function(err) {
