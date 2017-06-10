@@ -5,6 +5,7 @@ $('.submit-item').on('click', function (event) {
     event.preventDefault(); // Stop form from causing a page refresh.
     var data = {};
 		data.name = $("#submit-form").find("input").val();
+    var id;
     $.ajax({
       type: 'POST',
       data: JSON.stringify(data),
@@ -12,7 +13,7 @@ $('.submit-item').on('click', function (event) {
       url: '/create',
       success: function(data) {
         var itemName = data.name;
-        var itemHtml = '<li class="item" data-name="'+itemName+'"><a href="/delete/'+itemName+'">X</a><span>'+itemName +'</span>';
+        var itemHtml = '<li class="item" data-id="'+itemName+'"><a href="/delete/'+itemName+'">X</a><span>'+itemName +'</span>';
         $('ul.items').append(itemHtml);
         $("#submit-form").find("input").val('');
         //console.log(JSON.stringify(data));
@@ -23,13 +24,13 @@ $('.submit-item').on('click', function (event) {
 // Delete Item
 $('li.item').on('click', function (event) {
   event.preventDefault();
-  var name = $(this).attr('data-name');
+  var id = $(this).attr('data-id');
   $(this).remove();
   $.ajax({
     type: 'GET',
-    data: name,
+    data: id,
     contentType:'application/json',
-    url: '/delete/'+name,
+    url: '/delete/'+id,
     complete: function(response) {
       //$(this).remove();
     }

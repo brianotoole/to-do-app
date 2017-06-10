@@ -43,11 +43,11 @@ router.post('/create', (req, res, next) => {
 })
 
 // GET req, delete item
-router.get('/delete/:name', function (req, res) {
-  var name = req.params.name;
-  connection.query('DELETE FROM name WHERE name= ?', [name], function(err, result) {
+router.get('/delete/:id', function (req, res) {
+  var id = req.params.id;
+  connection.query('DELETE FROM name WHERE id= ?', [id], function(err, result) {
     //res.redirect( '/' );
-    console.log('deleted: ' + JSON.stringify(name));
+    console.log('deleted: ' + JSON.stringify(id));
   });
 });
 
