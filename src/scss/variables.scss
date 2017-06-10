@@ -1,3 +1,26 @@
-// testing
-$color-primary: red;
-$color-secondary: blue;
+// Variables
+
+// Colors: Brand
+$primary: #999;
+$gray: #f1f1f1;
+
+// Colors: Generic
+$body: #222;
+$black: #363636;
+$white: #ffffff;
+
+// Components
+$color-link: darken($primary, 7%);
+$color-info: #0088cc; // Blue
+$color-success: #377f31; // Green
+$color-error: #880e14; // Red
+$color-warning: #dba909; // Yellow
+$color-code: #dd1144;
+
+// Font Stacks
+$font-body: "open-sans", serif;
+$font-heading: "futura-pt", sans-serif;
+$font-monospace: monospace;
+
+// Sizing
+$font-size-body: 100%; //use a relative size (ex - 100%); changing variable will adjust scale of site
