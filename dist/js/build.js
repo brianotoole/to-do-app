@@ -89,7 +89,7 @@ $('.submit-item').on('click', function (event) {
         contentType:'application/json',
         url: '/create',
         success: function(data) {
-            console.log(data);
+            //console.log(data);
             var name = data.name;
             var id = data.id;
             var itemHtml = '<li class="item" data-id="'+id+'"><a href="/delete/'+id+'">X</a><span>'+name+'</span>';
@@ -105,7 +105,7 @@ $('li.item').on('click', function (event) {
   var id = $(this).attr('data-id');
   $(this).remove();
   $.ajax({
-      type: 'DELETE',
+      type: 'GET',
       data: id,
       contentType:'application/json',
       url: '/delete/'+id
