@@ -14,15 +14,22 @@
 }
 
 .page-wrap {
-  padding-top: 200px;
+  padding-top: 100px;
+}
+.title {
+  text-align: center;
 }
 form {
-  margin: 20px 0;
+  margin: 20px auto 40px;
+  text-align: center;
 }
 input {
-  width: 200px;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 15px auto;
   border: none;
-  border-bottom: 1px solid $gray;
+  border-bottom: 4px solid $gray;
   padding: 10px;
 }
 button {
@@ -42,6 +49,20 @@ button {
 }
 
 .items {
+  .item {
+    padding: 5px;
+    background: $gray;
+    border-bottom: 1px solid #fff;
+    &:hover {
+      background: darken($gray,7%);
+    }
+    &:nth-child(even) {
+      background: darken($gray,7%);
+      &:hover {
+        background: darken($gray,14%);
+      }
+    }
+  }
   li a {
     font-size: 20px;
   }

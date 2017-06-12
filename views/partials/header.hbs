@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row middle-xs">
       <div class="col-xs-12">
-        <div class="logo">LOGO</a>
+        {{#if user}}
+        <a href="/login">Login</a>
+        {{/if}}
+        <a href="/register">Register</a>
       </div>
     </div>
   </div>

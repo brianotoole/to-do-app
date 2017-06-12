@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-5 col-sm-offset-4">
-      <h1>What's on your plate today?</h1>
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <h1 class="title">What's on your plate today?</h1>
       <form id="submit-form" action="/create" method="POST">
         <input type="text" placeholder="Add item..." name="name">
         <button class="btn submit-item" type="submit">Add Item</button>
@@ -11,6 +11,8 @@
           <li class="item" data-id="{{id}}">
              <a href="/delete/{{id}}">X</a><span>{{name}}</span>
           </li>
+          {{else}}
+          <li><span>There are no items.</span></li>
         {{/each}}
       </ul>
     </div><!--/.col-->

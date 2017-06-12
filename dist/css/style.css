@@ -785,15 +785,22 @@ a {
     padding: 10px 0; }
 
 .page-wrap {
-  padding-top: 200px; }
+  padding-top: 100px; }
+
+.title {
+  text-align: center; }
 
 form {
-  margin: 20px 0; }
+  margin: 20px auto 40px;
+  text-align: center; }
 
 input {
-  width: 200px;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 15px auto;
   border: none;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 4px solid #f1f1f1;
   padding: 10px; }
 
 button {
@@ -809,6 +816,17 @@ button {
   cursor: pointer; }
   button:hover {
     background: #1b787b; }
+
+.items .item {
+  padding: 5px;
+  background: #f1f1f1;
+  border-bottom: 1px solid #fff; }
+  .items .item:hover {
+    background: #dfdfdf; }
+  .items .item:nth-child(even) {
+    background: #dfdfdf; }
+    .items .item:nth-child(even):hover {
+      background: #cdcdcd; }
 
 .items li a {
   font-size: 20px; }

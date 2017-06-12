@@ -61,4 +61,83 @@ router.get('/delete/:id', function (req, res) {
   });
 });
 
+
+// REGISTER
+router.get('/register', function (req, res) {
+  res.render('register', {
+    title: 'Register'
+  });
+});
+
+router.post('/register', function(req, res) {
+  var today = new Date();
+  var users = {
+    "first_name":req.body.first_name,
+    "last_name":req.body.last_name,
+    "email":req.body.email,
+    "password":req.body.password,
+    "created":today
+  }
+  connect.query('INSERT INTO users SET ?',users, function (error, results, fields) {
+  if (error) {
+    console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  } else {
+    console.log('The solution is: ', results);
+    res.send({
+      "code":200,
+      "success":"user registered sucessfully"
+    });
+  }
+  });
+});
+
+
+
+
+// Login
+router.get('/login', function (req, res) {
+  res.render('login', {
+    title: 'Login'
+  });
+});
+router.post('/login', function (req, res) {
+  var email= req.body.email;
+  var password = req.body.password;
+  connect.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
+  if (error) {
+    // console.log("error ocurred",error);
+    res.send({
+      "code":400,
+      "failed":"error ocurred"
+    })
+  } else{
+    // console.log('The solution is: ', results);
+    if(results.length >0){
+      if([0].password == password){
+        res.send({
+          "code":200,
+          "success":"login sucessfull"
+            });
+      }
+      else{
+        res.send({
+          "code":204,
+          "success":"Email and password do not match"
+            });
+      }
+    }
+    else{
+      res.send({
+        "code":204,
+        "success":"Email does not exist"
+          });
+    }
+  }
+  });
+});
+
 module.exports = router;
