@@ -5,6 +5,47 @@
   top: 0;
   left: 0;
   width: 100%;
+  height: auto;
   background: $black;
   color: white;
+  .logo {
+    padding: 10px 0;
+  }
+}
+
+.page-wrap {
+  padding-top: 200px;
+}
+form {
+  margin: 20px 0;
+}
+input {
+  width: 200px;
+  border: none;
+  border-bottom: 1px solid $gray;
+  padding: 10px;
+}
+button {
+  position: relative;
+  background-color: $primary;
+  border: none;
+  color: #fff;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: normal;
+  padding: 10px 30px;
+  transition: 0.25s all ease-out;
+  cursor: pointer;
+  &:hover {
+    background: darken($primary,7%);
+  }
+}
+
+.items {
+  li a {
+    font-size: 20px;
+  }
+  span {
+    margin-left: 8px;
+  }
 }

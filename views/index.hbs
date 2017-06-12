@@ -1,14 +1,18 @@
-<h1>{{{title}}}</h1>
-<ul class="items">
-  {{#each todos}}
-    <li class="item" data-id="{{id}}">
-       <a href="/delete/{{id}}">X</a><span>{{name}}</span>
-    </li>
-  {{/each}}
-</ul>
-
-<h2>Add Item</h2>
-<form id="submit-form" action="/create" method="POST">
-  <input type="text" placeholder="Item" name="name">
-  <button class="btn submit-item" type="submit">Add Item</button>
-</form>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-5 col-sm-offset-4">
+      <h1>What's on your plate today?</h1>
+      <form id="submit-form" action="/create" method="POST">
+        <input type="text" placeholder="Add item..." name="name">
+        <button class="btn submit-item" type="submit">Add Item</button>
+      </form>
+      <ul class="items">
+        {{#each todos}}
+          <li class="item" data-id="{{id}}">
+             <a href="/delete/{{id}}">X</a><span>{{name}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    </div><!--/.col-->
+  </div><!--/.row-->
+</div><!--/.container-->

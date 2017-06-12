@@ -63,7 +63,7 @@ body {
   -ms-text-size-adjust: 100%; }
 
 a {
-  color: #999;
+  color: #229498;
   text-decoration: none; }
   a:hover, a:focus {
     text-decoration: underline; }
@@ -93,6 +93,68 @@ th {
 tbody tr:nth-child(odd) td,
 tbody tr:nth-child(odd) th {
   background-color: #f9f9f9; }
+
+/* latin */
+@font-face {
+  font-family: 'IM Fell DW Pica';
+  font-style: normal;
+  font-weight: 400;
+  src: local("IM FELL DW Pica Roman"), local("IM_FELL_DW_Pica_Roman"), url(https://fonts.gstatic.com/s/imfelldwpica/v6/W81bfaWiUicLSPbJhW-ATg4Knk7z9oUsSJj2UNigjc4.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
+
+/* latin */
+@font-face {
+  font-family: 'Zeyada';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Zeyada"), url(https://fonts.gstatic.com/s/zeyada/v6/lj9zhXPDjH_bcPx9XDstTevvDin1pK8aKteLpeZ5c0A.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
+
+body {
+  font-family: "IM Fell DW Pica", serif;
+  font-weight: normal;
+  line-height: 1.5; }
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  font-family: "Zeyada", sans-serif;
+  font-weight: normal;
+  line-height: 1.2;
+  word-wrap: break-word; }
+
+h1,
+.h1 {
+  font-size: 2em; }
+
+h2,
+.h2 {
+  font-size: 1.75em; }
+
+h3,
+.h3 {
+  font-size: 1.5em; }
+
+h4,
+.h4 {
+  font-size: 1.375em; }
+
+h5,
+.h5 {
+  font-size: 1.125em; }
+
+h6,
+.h6 {
+  font-size: 1em; }
+
+a {
+  background-color: transparent;
+  color: #229498;
+  text-decoration: none;
+  word-wrap: break-word; }
+  a:active, a:hover {
+    outline: 0; }
+  a:active, a:focus, a:hover {
+    color: #145759;
+    text-decoration: underline; }
 
 .wrapper {
   box-sizing: border-box;
@@ -716,5 +778,40 @@ tbody tr:nth-child(odd) th {
   top: 0;
   left: 0;
   width: 100%;
+  height: auto;
   background: #363636;
   color: white; }
+  .header .logo {
+    padding: 10px 0; }
+
+.page-wrap {
+  padding-top: 200px; }
+
+form {
+  margin: 20px 0; }
+
+input {
+  width: 200px;
+  border: none;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 10px; }
+
+button {
+  position: relative;
+  background-color: #229498;
+  border: none;
+  color: #fff;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: normal;
+  padding: 10px 30px;
+  transition: 0.25s all ease-out;
+  cursor: pointer; }
+  button:hover {
+    background: #1b787b; }
+
+.items li a {
+  font-size: 20px; }
+
+.items span {
+  margin-left: 8px; }
