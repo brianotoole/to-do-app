@@ -6,6 +6,7 @@ var dbName = process.env.APP_DB_NAME;
 
 var express = require('express');
 var mysql = require('mysql');
+var bcrypt = require('bcrypt');
 var router = express.Router();
 
 var sqlPool = {
@@ -71,11 +72,13 @@ router.get('/register', function (req, res) {
 
 router.post('/register', function(req, res) {
   var today = new Date();
+  var salt = bcrypt.genSaltSync(10);
+  var pass = bcrypt.hashSync(req.body.password, salt);
   var users = {
     "first_name":req.body.first_name,
     "last_name":req.body.last_name,
     "email":req.body.email,
-    "password":req.body.password,
+    "password":pass,
     "created":today
   }
   connect.query('INSERT INTO users SET ?',users, function (error, results, fields) {
