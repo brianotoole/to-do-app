@@ -109,37 +109,21 @@ router.get('/login', function (req, res) {
 });
 router.post('/login', function (req, res) {
   var email= req.body.email;
-  var password = req.body.password;
-  connect.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
-  if (error) {
-    // console.log("error ocurred",error);
-    res.send({
-      "code":400,
-      "failed":"error ocurred"
-    })
-  } else{
-    // console.log('The solution is: ', results);
-    if(results.length >0){
-      if([0].password == password){
-        res.send({
-          "code":200,
-          "success":"login sucessfull"
-            });
+  var enteredPass = req.body.password;
+  var salt = bcrypt.genSaltSync(10);
+  var hashedPass = bcrypt.hashSync(req.body.password, salt);
+  connect.query('SELECT * FROM users', function (error, results, fields) {
+    //res.send({"users": results});
+    bcrypt.compare(enteredPass, hashedPass, function(err, matches) {
+      if (err) {
+        console.log('Error while checking password');
+      } else if (matches) {
+        console.log('The password matches!');
+      } else {
+        console.log('The password does NOT match!');
       }
-      else{
-        res.send({
-          "code":204,
-          "success":"Email and password do not match"
-            });
-      }
-    }
-    else{
-      res.send({
-        "code":204,
-        "success":"Email does not exist"
-          });
-    }
-  }
+    });
+
   });
 });
 

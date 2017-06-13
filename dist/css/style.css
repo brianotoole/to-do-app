@@ -793,6 +793,9 @@ a {
 form {
   margin: 20px auto 40px;
   text-align: center; }
+  form .error {
+    display: block;
+    color: red; }
 
 input {
   display: block;

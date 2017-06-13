@@ -22,6 +22,10 @@
 form {
   margin: 20px auto 40px;
   text-align: center;
+  .error {
+    display: block;
+    color: red;
+  }
 }
 input {
   display: block;
