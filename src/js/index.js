@@ -34,7 +34,7 @@ $('li.item').on('click', function (event) {
   });
 });
 
-
+// Login form validation
 $('#login-form').submit(function(e) {
     e.preventDefault();
     var email = $('input#email').val();
@@ -47,7 +47,7 @@ $('#login-form').submit(function(e) {
        setTimeout(function(){
              $('.error.pass').text("");
              $('.error.email').text("");
-           }, 2000);//Time in milliseconds
+           }, 2000);
        return false;
     }
 
@@ -56,7 +56,7 @@ $('#login-form').submit(function(e) {
        $('#email').focus();
        setTimeout(function(){
              $('.error.email').text("");
-           }, 2000);//Time in milliseconds
+           }, 2000);
        return false;
     }
 
@@ -65,7 +65,7 @@ $('#login-form').submit(function(e) {
        $('#password').focus();
        setTimeout(function(){
              $('.error.pass').text("");
-           }, 2000);//Time in milliseconds
+           }, 2000);
        return false;
     }
 
